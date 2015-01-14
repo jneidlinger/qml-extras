@@ -25,6 +25,7 @@ Item {
 
     property alias source: image.source
     property alias status: image.status
+    property alias fillMode: image.fillMode
 
     width: image.implicitWidth
     height: image.implicitHeight
@@ -39,8 +40,9 @@ Item {
 
     Image {
         id: mask
-        source: Qt.resolvedUrl("circle.png")
+        source: Qt.resolvedUrl("images/circle.png")
         anchors.fill: image
+        fillMode: image.fillMode
         smooth: true
         visible: false
         mipmap: true
