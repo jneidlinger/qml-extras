@@ -1,7 +1,7 @@
 /*
  * QML Extras - Extra types and utilities to make QML even more awesome
  *
- * Copyright (C) 2014 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2015 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -18,41 +18,27 @@
  */
 
 import QtQuick 2.3
-import Material.Extras 0.1 as Extras
 import QtGraphicalEffects 1.0
 
 Item {
     id: item
 
-    property alias source: image.source
-    property alias status: image.status
-    property alias averageColor: image.averageColor
-    property alias fillMode: image.fillMode
+    property alias source: mask.source
 
-    width: image.implicitWidth
-    height: image.implicitHeight
-
-    Extras.Image {
-        id: image
+    Rectangle {
+        id: circleMask
         anchors.fill: parent
-        smooth: true
-        visible: false
-        mipmap: true
-    }
 
-    Extras.Image {
-        id: mask
-        source: Qt.resolvedUrl("images/circle.png")
-        anchors.fill: image
-        fillMode: image.fillMode
         smooth: true
         visible: false
-        mipmap: true
+
+        radius: Math.max(width/2, height/2)
     }
 
     OpacityMask {
-        anchors.fill: image
-        source: image
-        maskSource: mask
+        id: mask
+
+        anchors.fill: parent
+        maskSource: circleMask
     }
 }
